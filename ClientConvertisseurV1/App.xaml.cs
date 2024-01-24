@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using ClientConvertisseurV1.Views;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -42,7 +43,14 @@ namespace ClientConvertisseurV1
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             m_window = new MainWindow();
+            // Création d'un Frame qui agira comme le contexte de naviagtion
+            Frame rootFrame = new Frame();
+            // Placement du Frame dans la fenêtre principale
+            m_window.Content = rootFrame;
+            // On active la fenêtre actuelle
             m_window.Activate();
+            // Navigation à la première page
+            rootFrame.Navigate(typeof(ConvertisseurEuroPage));
         }
 
         private Window m_window;
