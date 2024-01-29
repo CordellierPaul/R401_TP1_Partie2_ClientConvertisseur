@@ -25,7 +25,7 @@ namespace ClientConvertisseurV1.Views
     {
         public ConvertisseurEuroPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }
