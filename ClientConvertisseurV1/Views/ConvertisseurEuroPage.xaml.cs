@@ -10,6 +10,7 @@ using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -18,25 +19,49 @@ using Windows.Foundation.Collections;
 
 namespace ClientConvertisseurV1.Views
 {
-    public sealed partial class ConvertisseurEuroPage : Page
+    public sealed partial class ConvertisseurEuroPage : Page, INotifyPropertyChanged
     {
-        public ObservableCollection<Devise> LesDevises { get; set; }
+        private ObservableCollection<Devise> _lesDevises;
+        public ObservableCollection<Devise> LesDevises
+        {
+            get => _lesDevises;
+            set
+            {
+                _lesDevises = value;
+                OnPropertyChanged(nameof(LesDevises));
+            }
+        }
+
+        public Devise DeviseSelectionnee { get; set; }
         public double MontantEnEuros { get; set; }
         public double MontantEnDevises { get; set; }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
 
         public ConvertisseurEuroPage()
         {
             InitializeComponent();
             DataContext = this;
+
             GetDataOnLoadAsync();
         }
 
         private async void GetDataOnLoadAsync()
         {
-            IService service = new WSService("https://localhost:4561/api/");
+            IService service = new WSService("http://localhost:5272/api/");
             List<Devise> result = await service.GetDevisesAsync("devises");
             if (result is null)
-                MessageAsync("API non disponible !", "Erreur");
+                MessageAsync("API non disponible !", "Erreur"); // Utiliser le code de R401 sur Github pour que ça marche
             else
                 LesDevises = new ObservableCollection<Devise>(result);
         }
