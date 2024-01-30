@@ -12,14 +12,20 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using ClientConvertisseurV2;
+using ClientConvertisseurV2.Views;
 
-namespace ClientConvertisseurV1.ViewModels
+namespace ClientConvertisseurV2.ViewModels
 {
     public class ConvertisseurEuroViewModel : ConvertisseurViewModel
     {
-        protected override void ChangerDePageConvertisseur()
+        public override void ChangerDePageConvertisseur()
         {
-            
+            App.Current.RootFrame.Navigate(typeof(ConvertisseurDiversPage));
+        }
+
+        public override void ActionConvertir()
+        {
+            MontantEnDevises = MontantEnEuros * DeviseSelectionnee.Taux;
         }
     }
 }

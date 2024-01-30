@@ -11,12 +11,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClientConvertisseurV1.ViewModels
+namespace ClientConvertisseurV2.ViewModels
 {
     public abstract class ConvertisseurViewModel : ObservableObject
     {
+        private ObservableCollection<Devise> _lesDevises;
+        public ObservableCollection<Devise> LesDevises
+        {
+            get => _lesDevises;
+            set
+            {
+                _lesDevises = value;
+                OnPropertyChanged();
+            }
+        }
+
         public Devise DeviseSelectionnee { get; set; }
-        public double MontantEnEuros { get; set; }
+
+        private double _montantEnEuros;
+        public double MontantEnEuros
+        {
+            get => _montantEnEuros;
+            set
+            {
+                _montantEnEuros = value;
+                OnPropertyChanged();
+            }
+        }
 
         private double _montantEnDevises;
         public double MontantEnDevises
@@ -29,30 +50,31 @@ namespace ClientConvertisseurV1.ViewModels
             }
         }
 
-        private ObservableCollection<Devise> _lesDevises;
-        public ObservableCollection<Devise> LesDevises
-        {
-            get => _lesDevises;
-            set
-            {
-                _lesDevises = value;
-                OnPropertyChanged();
-            }
-        }
-
         public IRelayCommand BtnConvertir { get; }
+        public IRelayCommand BtnChangerPage { get; }
 
         public ConvertisseurViewModel()
         {
             GetDataOnLoadAsync();
 
-            BtnConvertir = new RelayCommand(ActionConvertir);
+            BtnConvertir = new RelayCommand(VerificationChampsAvantConversion);
+            BtnChangerPage = new RelayCommand(ChangerDePageConvertisseur);
         }
 
-        private void ActionConvertir()
+        public void VerificationChampsAvantConversion()
         {
-            MontantEnDevises = MontantEnEuros * DeviseSelectionnee.Taux;
+            if (DeviseSelectionnee == null)
+            {
+                MessageAsync("Quelle devise voulez-vous sélectionner ?", "Erreur");
+                return;
+            }
+
+            ActionConvertir();
         }
+
+        public abstract void ActionConvertir();
+
+        public abstract void ChangerDePageConvertisseur();
 
         private async void GetDataOnLoadAsync()
         {
@@ -76,7 +98,5 @@ namespace ClientConvertisseurV1.ViewModels
             messageDialog.XamlRoot = App.MainRoot.XamlRoot;
             await messageDialog.ShowAsync();
         }
-
-        protected abstract void ChangerDePageConvertisseur();
     }
 }

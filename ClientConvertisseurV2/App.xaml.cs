@@ -1,4 +1,4 @@
-﻿using ClientConvertisseurV1.ViewModels;
+﻿using ClientConvertisseurV2.ViewModels;
 using ClientConvertisseurV2.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
@@ -43,6 +43,7 @@ namespace ClientConvertisseurV2
 
             // ViewModels :
             services.AddTransient<ConvertisseurEuroViewModel>();
+            services.AddTransient<ConvertisseurDiversViewModel>();
 
             Services = services.BuildServiceProvider();
         }
@@ -59,16 +60,18 @@ namespace ClientConvertisseurV2
         {
             m_window = new MainWindow();
             // Création d'un Frame qui agira comme le contexte de naviagtion
-            Frame rootFrame = new Frame();
+            RootFrame = new Frame();
             // Placement du Frame dans la fenêtre principale
-            m_window.Content = rootFrame;
+            m_window.Content = RootFrame;
             // On active la fenêtre actuelle
             m_window.Activate();
             // Navigation à la première page
-            rootFrame.Navigate(typeof(ConvertisseurEuroPage));
+            RootFrame.Navigate(typeof(ConvertisseurEuroPage));
 
             MainRoot = (FrameworkElement)m_window.Content;
         }
+
+        public Frame RootFrame { get; private set; }
 
         private Window m_window;
     }

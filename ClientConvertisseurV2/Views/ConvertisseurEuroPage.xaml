@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="ClientConvertisseurV2.Views.ConvertisseurEuroPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:ClientConvertisseurV2.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock
+            Margin="0,0,0,5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Style="{StaticResource TitleTextBlockStyle}"
+            Text="Montant en Euros" />
+
+        <TextBox
+            Width="200"
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="{Binding MontantEnEuros, Mode=TwoWay}" />
+
+        <TextBlock
+            Margin="0,0,0,5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Style="{StaticResource TitleTextBlockStyle}"
+            Text="Devise" />
+
+        <ComboBox
+            Name="cbLesDevises"
+            Width="200"
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            DisplayMemberPath="NomDevise"
+            ItemsSource="{Binding LesDevises}"
+            SelectedValue="{Binding DeviseSelectionnee, Mode=TwoWay}" />
+
+        <Button
+            Width="200"
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Command="{Binding BtnConvertir}"
+            Content="Convertir" />
+
+        <TextBlock
+            Margin="0,10,0,5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Style="{StaticResource TitleTextBlockStyle}"
+            Text="Montant en devises" />
+
+        <TextBox
+            Width="200"
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="{Binding MontantEnDevises, Mode=TwoWay}" />
+
+        <Button
+            Width="300"
+            Margin="0,10,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Command="{Binding BtnChangerPage}"
+            Content="Changer d'ordre de conversion" />
+    </StackPanel>
+    <!--  Source : Evan  -->
+</Page>
