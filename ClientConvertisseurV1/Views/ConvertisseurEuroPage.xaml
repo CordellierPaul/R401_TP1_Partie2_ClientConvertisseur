@@ -46,6 +46,7 @@
             Margin="0,0,0,10"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
+            Click="btConvertir_Click"
             Content="Convertir" />
 
         <TextBlock

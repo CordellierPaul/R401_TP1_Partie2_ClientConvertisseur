@@ -34,8 +34,17 @@ namespace ClientConvertisseurV1.Views
 
         public Devise DeviseSelectionnee { get; set; }
         public double MontantEnEuros { get; set; }
-        public double MontantEnDevises { get; set; }
+        private double _montantEnDevises;
 
+        public double MontantEnDevises
+        {
+            get => _montantEnDevises;
+            set
+            {
+                _montantEnDevises = value;
+                OnPropertyChanged(nameof(MontantEnDevises));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -43,9 +52,7 @@ namespace ClientConvertisseurV1.Views
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
-            {
                 handler(this, new PropertyChangedEventArgs(name));
-            }
         }
 
         public ConvertisseurEuroPage()
@@ -77,6 +84,11 @@ namespace ClientConvertisseurV1.Views
 
             messageDialog.XamlRoot = Content.XamlRoot;
             await messageDialog.ShowAsync();
+        }
+
+        public void btConvertir_Click(object sender, RoutedEventArgs e)
+        {
+            MontantEnDevises = MontantEnEuros * DeviseSelectionnee.Taux;
         }
     }
 }
