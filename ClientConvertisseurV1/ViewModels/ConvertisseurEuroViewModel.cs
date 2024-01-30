@@ -15,68 +15,11 @@ using ClientConvertisseurV2;
 
 namespace ClientConvertisseurV1.ViewModels
 {
-    public class ConvertisseurEuroViewModel : ObservableObject
+    public class ConvertisseurEuroViewModel : ConvertisseurViewModel
     {
-        private ObservableCollection<Devise> _lesDevises;
-        public ObservableCollection<Devise> LesDevises
+        protected override void ChangerDePageConvertisseur()
         {
-            get => _lesDevises;
-            set
-            {
-                _lesDevises = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public Devise DeviseSelectionnee { get; set; }
-        public double MontantEnEuros { get; set; }
-
-        private double _montantEnDevises;
-        public double MontantEnDevises
-        {
-            get => _montantEnDevises;
-            set
-            {
-                _montantEnDevises = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public IRelayCommand BtnConvertir { get; }
-
-        public ConvertisseurEuroViewModel()
-        {
-            GetDataOnLoadAsync();
-
-            BtnConvertir = new RelayCommand(ActionConvertir);
-        }
-
-        private void ActionConvertir()
-        {
-            MontantEnDevises = MontantEnEuros * DeviseSelectionnee.Taux;
-        }
-
-        private async void GetDataOnLoadAsync()
-        {
-            IService service = new WSService("http://localhost:5272/api/");
-            List<Devise> result = await service.GetDevisesAsync("devises");
-            if (result is null)
-                MessageAsync("API non disponible !", "Erreur"); // Utiliser le code de R401 sur Github pour que ça marche
-            else
-                LesDevises = new ObservableCollection<Devise>(result);
-        }
-
-        private async void MessageAsync(string content, string title)
-        {
-            var messageDialog = new ContentDialog
-            {
-                Title = title,
-                Content = content,
-                CloseButtonText = "OK"
-            };
-
-            messageDialog.XamlRoot = App.MainRoot.XamlRoot;
-            await messageDialog.ShowAsync();
+            
         }
     }
 }
