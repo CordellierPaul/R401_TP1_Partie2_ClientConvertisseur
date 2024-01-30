@@ -27,10 +27,5 @@ namespace ClientConvertisseurV1
         {
             InitializeComponent();
         }
-
-        private void myButton_Click(object sender, RoutedEventArgs e)
-        {
-            myButton.Content = "Clicked";
-        }
     }
 }

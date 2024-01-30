@@ -9,18 +9,54 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
-    <RelativePanel>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock
+            Margin="0,0,0,5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Style="{StaticResource TitleTextBlockStyle}"
+            Text="Montant en Euros" />
 
-        <TextBlock Text="Montant en Euros" />
-        <TextBox />
+        <TextBox
+            Width="200"
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center" />
 
-        <TextBlock Text="Devise" />
-        <ComboBox />
+        <TextBlock
+            Margin="0,0,0,5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Style="{StaticResource TitleTextBlockStyle}"
+            Text="Devise" />
 
-        <Button />
+        <ComboBox
+            Width="200"
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            DisplayMemberPath="NomDevise"
+            ItemsSource="{Binding Devises, Mode=OneWay}" />
 
-        <TextBlock Text="Montant en devises" />
-        <TextBox />
+        <Button
+            Width="200"
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Content="Convertir" />
 
-    </RelativePanel>
+        <TextBlock
+            Margin="0,10,0,5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Style="{StaticResource TitleTextBlockStyle}"
+            Text="Montant en devises" />
+
+        <TextBox
+            Width="200"
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center" />
+    </StackPanel>
+    <!--  Source : Evan  -->
 </Page>
