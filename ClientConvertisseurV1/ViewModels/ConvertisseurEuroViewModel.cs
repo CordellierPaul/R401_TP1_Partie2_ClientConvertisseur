@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
+using ClientConvertisseurV2;
 
 namespace ClientConvertisseurV1.ViewModels
 {
@@ -74,7 +75,7 @@ namespace ClientConvertisseurV1.ViewModels
                 CloseButtonText = "OK"
             };
 
-            //messageDialog.XamlRoot = Content.XamlRoot;
+            messageDialog.XamlRoot = App.MainRoot.XamlRoot;
             await messageDialog.ShowAsync();
         }
     }
