@@ -12,7 +12,7 @@ namespace ClientConvertisseurV2.ViewModels
     {
         public override void ChangerDePageConvertisseur()
         {
-            App.Current.RootFrame.Navigate(typeof(ConvertisseurDiversPage));
+            App.Current.RootFrame.Navigate(typeof(ConvertisseurEuroPage));
         }
 
         public override void ActionConvertir()

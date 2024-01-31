@@ -55,7 +55,9 @@ namespace ClientConvertisseurV2.ViewModels
 
         public ConvertisseurViewModel()
         {
+#pragma warning disable CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
             GetDataOnLoadAsync();
+#pragma warning restore CS4014
 
             BtnConvertir = new RelayCommand(VerificationChampsAvantConversion);
             BtnChangerPage = new RelayCommand(ChangerDePageConvertisseur);
@@ -76,7 +78,7 @@ namespace ClientConvertisseurV2.ViewModels
 
         public abstract void ChangerDePageConvertisseur();
 
-        private async void GetDataOnLoadAsync()
+        public async Task GetDataOnLoadAsync()
         {
             IService service = new WSService("http://localhost:5272/api/");
             List<Devise> result = await service.GetDevisesAsync("devises");
